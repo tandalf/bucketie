@@ -52,12 +52,12 @@ The values given here are the default if the environment variables are not set.
 
 Migrate the database
 
-    python manage.py makemigrations
-    python manage.py migrate
+    python manage.py makemigrations --settings=settings.base
+    python manage.py migrate --settings=settings.base
 
 Create a super user who will be an admin
 
-    python manage.py createsuperuser
+    python manage.py createsuperuser --settings=settings.base
 
 Run SERVER!
 

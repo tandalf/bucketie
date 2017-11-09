@@ -7,6 +7,8 @@ from django.contrib.auth import get_user_model
 
 from bucketie.models import TimeStampedModel, DescribedModel
 
+UserModel = get_user_model()
+
 def default_user():
     """
     Gets the id of the default user that will be used to populate the owner

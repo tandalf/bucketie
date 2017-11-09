@@ -2,9 +2,11 @@
 from __future__ import unicode_literals
 
 from rest_framework import viewsets, generics
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from .models import UserModel, BucketList
 from .serializers import BucketListSerializer, RetrieveUserSerializer
+from .permissions import OwnerOnlyPermission
 
 class UserView(generics.RetrieveAPIView):
     queryset = UserModel.objects.all()
@@ -17,6 +19,7 @@ class BucketListViewSet(viewsets.ModelViewSet):
     """
     queryset = BucketList.objects.all()
     serializer_class = BucketListSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser, OwnerOnlyPermission)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

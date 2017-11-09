@@ -63,6 +63,23 @@ Run SERVER!
 
     python manage.py runserver localhost:8000 --settings=settings.base
 
+# Application Behaviour (Specs)
+This section describes how the endpoints are supposed to behave.
+
+To start with I'd explain some of the abstractions used and what their roles
+are in the software.
+
+## BucketList
+This is the main container for items in the software. It is the resource accessed
+through the /bucketlist endpoint. According to the specs, only admins are allowed
+to create and manipulate BucketLists. Ordinary users are denied permission to it's
+endpoint.
+
+## BucketListItems
+This is the item that is contained in a BucketList. Even though BucketList can only
+be acted upon by admins, any type of user is allowed to interact with BucketListItems
+if the item was assigned to them. They are usually accessed through the /bucketlist/<id>/items
+endpoints.
 
 #Running The Tests
 This app has been tested to some extent. To run the unittests, enter

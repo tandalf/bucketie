@@ -25,6 +25,7 @@ relatively neutral one here).
 You can no grant all privileges to the user on the created db like so.
 
     GRANT ALL PRIVILEGES ON DATABASE bucketie TO tim;
+    ALTER USER tim CREATEDB;
 
 ## Setting up a virtual environment
 I'm not going to preach about virtual environments here (we've all heard the sermon,

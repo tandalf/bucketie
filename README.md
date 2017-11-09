@@ -62,3 +62,9 @@ Create a super user who will be an admin
 Run SERVER!
 
     python manage.py runserver localhost:8000
+
+
+#Running The Tests
+This app has been tested to some extent. To run the unittests, enter
+
+    python manage.py test --settings=settings.test --pattern="*"

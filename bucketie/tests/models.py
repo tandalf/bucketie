@@ -20,3 +20,12 @@ class TestTimeStampedModels(TestCase):
 
         self.assertGreater(timed.created_at, create_start)
         self.assertLess(timed.created_at, create_end)
+
+    def test_modified_at_field(self):
+        create_start = now()
+        timed = TimedModel()
+        create_end = now()
+        timed.save()
+
+        self.assertGreater(timed.modified_at, create_start)
+        self.assertLess(timed.modified_at, create_end)

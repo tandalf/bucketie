@@ -17,9 +17,12 @@ class BucketListViewSet(viewsets.ModelViewSet):
     View set created with the responsibility of listing, retrieving or deleting
     BucketList views
     """
-    queryset = BucketList.objects.all()
     serializer_class = BucketListSerializer
     permission_classes = (IsAuthenticated, IsAdminUser, OwnerOnlyPermission)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+        user = self.request.user
+        return BucketList.objects.filter(owner=user)

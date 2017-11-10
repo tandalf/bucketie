@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="">
+  <div class="row easy-welcome">
+    <div class="col-sm-6 welcome1">
+      <h2>Welcome to Bucketie</h2>
+      <p>Create BucketList, add BucketListItems, assign users to items, thats all!</p>
+      <br>
+        <div class="form-inline single-input">
+          <div class="input-group">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+              <input type="test" name="phone" class="form-control" placeholder="Enter Username" data-bind=" value: initUserName">
+            </div>
+            <div class="input-group-btn">
+              <button class="btn btn-primary" data-bind="with:authVM, click: authVM.showLogin">Proceed</button>
+            </div>
+          </div>
+        </div>
+        <p class="text-center" style="margin-top: 5px; margin-left: -40px; max-width: 400px;"><strong>Not Registered? <span class="link" data-bind="click: authVM.showRegistration">Sign Up!</span></strong></p>
+    </div>
+    <div class="col-sm-6 welcome2">
+      <img class="center-block" src="img/bucket.png" style="width: 100%; max-height: 600px; max-width: 400px">
+    </div>
+  </div>
+
+  <div id="login-modal" class="modal mid-modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Login</h4>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger"></div>
+          <form id="login-form" class="form" data-bind="with: authVM.loginData, submit: authVM.loginUser">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+              <input type="text" name="phone" class="form-control" placeholder="Username *" data-bind="value: username">
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+              <input type="password" name="password" class="form-control" placeholder="Password *" data-bind="value: password">
+            </div>
+            <br>
+            <div id="anim-ball">
+              <div id="anim-ball_1" class="anim-ball"></div>
+              <div id="anim-ball_2" class="anim-ball"></div>
+              <div id="anim-ball_3" class="anim-ball"></div>
+              <div id="anim-ball_4" class="anim-ball"></div>
+            </div>
+            <input  type="submit" value="Login" class="btn btn-primary btn-block">
+          </form>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /login .modal -->
+
+</div>
+{% endblock content %}

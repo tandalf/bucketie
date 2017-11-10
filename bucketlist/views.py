@@ -6,11 +6,13 @@ from django.db.models import Q
 from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
-from .models import UserModel, BucketList
+from .models import UserModel, BucketList, BucketListItem
 from .serializers import (
     BucketListSerializer, BucketListItemSerializer, RetrieveUserSerializer 
 )
-from .permissions import OwnerOnlyPermission, OwnerAndAssignedUserPermission
+from .permissions import (
+    OnlyBucketListOwnerCanListPermission, OwnerOrAssignedUserPermission, OwnerOnlyPermission
+)
 
 class UserView(generics.RetrieveAPIView):
     queryset = UserModel.objects.all()
@@ -42,13 +44,13 @@ class BucketListItemViewSet(viewsets.ModelViewSet):
     deleting BucketList views
     """
     serializer_class = BucketListItemSerializer
-    permissions_classes = (IsAuthenticated, OwnerAndAssignedUserPermission)
+    permission_classes = (IsAuthenticated, OnlyBucketListOwnerCanListPermission)
 
-    def get_quertset(self):
+    def get_queryset(self):
         """
         Filter the queryset to allow only the assigned user of the BucketListItem
         and the owner of the containing BucketList to access the items.
         """
         user = self.request.user
-        return BucketListItem.objects.filter(Q(assigned_user=user) | 
-            Q(bucketlist__owner=user))
+        return BucketListItem.objects.filter(Q(assigned_user=user.pk) | 
+            Q(bucketlist__owner=user.pk))

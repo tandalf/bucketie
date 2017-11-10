@@ -1,3 +1,5 @@
+![coverage](coverage.svg)
+
 # Installing Bucketie
 This project assumes you intend on using postgres as your database system for
 running this app.
@@ -85,3 +87,20 @@ endpoints.
 This app has been tested to some extent. To run the unittests, enter
 
     python manage.py test --settings=settings.test --pattern="*"
+
+To run the tests with code coverage report, make sure you have installed the test 
+dependencies
+
+    pip install -r requirements/test.txt
+
+With the test dependencies installed, enter 
+
+    coverage run --source='.' --omit='manage.py' manage.py test --settings=settings.test --pattern="*"
+
+To view the report, enter
+
+    coverage report
+
+If you need to generate the coverage badge yourself, just use
+
+    coverage-badge -o coverage.svg

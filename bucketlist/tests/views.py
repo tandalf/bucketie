@@ -6,20 +6,15 @@ from django.db import models
 from rest_framework.test import APIRequestFactory, force_authenticate
 from rest_framework import status
 
+from bucketie.tests.test_mixins import UtilsProviderTestMixin
 from ..models import UserModel, BucketList, BucketListItem
 from ..views import BucketListViewSet
 
 bucketlist_list_view = BucketListViewSet.as_view({'get': 'list'})
 
-class TestBucketListViews(TestCase):
+class TestBucketListViews(TestCase, UtilsProviderTestMixin):
     def setUp(self):
-        self.factory = APIRequestFactory()
-        self.admin1 = UserModel.objects.create_user(username='tim', 
-            email='tim@live.com', password='top_secret')
-        self.user1 = UserModel.objects.create_user(username='timo', 
-            email='timo@live.com', password='top_secret')
-        self.user2 = UserModel.objects.create_user(username='timu', 
-            email='timu@live.com', password='top_secret')
+        super(TestBucketListViews, self).setUpUtilsProvider()
 
     def create_bucketlist(self, user, name="My Bucketlist", description="B"):
         bucketlist = BucketList(owner=user, name=name, description=description)

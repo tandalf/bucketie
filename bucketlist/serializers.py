@@ -14,3 +14,10 @@ class BucketListSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'owner', 'name', 'description', 'created_at', 'modified_at')
         read_only_fields = ('url', 'owner', 'created_at', 'modified_at')
         
+
+class BucketListItemSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = BucketListItem
+        fields = ('url', 'owner', 'name', 'description', 'done', 'created_at', 
+            'modified_at')
+        read_only_fields = ('url', 'owner', 'created_at', 'modified_at')

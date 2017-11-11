@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div>
+  <div class="actions center-block">
+    <div class="actions-header"></div>
+    <div class="row actions-body">
+      <div class="col-sm-6">
+        <div class="action center-block">
+          <div class="action-header">
+            <h2>Create BucketList</h2>
+          </div>
+          <div class="action-content">
+            <p>Create a BucketList for containing BucketListItems. Get Bucketting.</p>
+          </div>
+          <div class="action-footer">
+            <div class="text-center">
+              <a class="glyphicon glyphicon-plus" href=""></a>
+            </div>
+            <button class="btn btn-block btn-primary" data-bind="click: bucketListVM.showCreateBucketList">Create Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="action center-block">
+          <div class="action-header">
+            <h2>My BucketList</h2>
+          </div>
+          <div class="action-content">
+            <p>View the BucketLists that you've created on this web app.</p>
+          </div>
+          <div class="action-footer">
+            <div class="text-center">
+              <a class="glyphicon glyphicon-list-alt" href=""></a>
+            </div>
+            <button class="btn btn-block btn-primary" href="">View</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="create-bucketlist-modal" class="modal mid-modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Create a BucketList</h4>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger"></div>
+          <form id="login-form" class="form" data-bind="with: bucketListVM.createBucketListData, submit: bucketListVM.createBucketList">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+              <input type="text" name="phone" class="form-control" placeholder="Name *" data-bind="value: name">
+            </div>
+            <br>
+            <div class="">
+              <textarea name="description" class="form-control" placeholder="Describe the bucketlist" data-bind="value: description"></textarea>
+            </div>
+            <br>
+            <div id="anim-ball">
+              <div id="anim-ball_1" class="anim-ball"></div>
+              <div id="anim-ball_2" class="anim-ball"></div>
+              <div id="anim-ball_3" class="anim-ball"></div>
+              <div id="anim-ball_4" class="anim-ball"></div>
+            </div>
+            <input  type="submit" value="Create" class="btn btn-primary btn-block">
+          </form>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /create bucketlist .modal -->
+</div>
+{% endblock content %}
+
+{% block js %}
+  <script src="{% static "js/BucketListViewModel.js" %}"></script>
+  {{block.super}}
+{% endblock js %}

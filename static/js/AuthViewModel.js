@@ -39,7 +39,7 @@ var AuthViewModel = function(loginURL, indexVM){
             token: resp.token,
             name: self.loginData.username()
         });
-        window.location.href = siteURL + "signedin.html";
+        window.location.href = siteURL + "signedin";
     }
 
     self.loginFailure = function(resp){

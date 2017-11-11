@@ -82,6 +82,11 @@ var deleteStorageUser = function(){
     localStorage.removeItem("username");
 }
 
+var authHeader = function(){
+    var userDetails = utils.storageUserDetails();
+    return 'Token ' + (userDetails.token || '');
+}
+
 utils = {
     ModalHelper: function(id){
         return new ModalHelper(id)
@@ -89,4 +94,5 @@ utils = {
     storeUserDetails: storeUserDetails,
     storageUserDetails: storageUserDetails,
     deleteStorageUser: deleteStorageUser,
+    authHeader: authHeader,
 }

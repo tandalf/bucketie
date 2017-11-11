@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="row">
+  <div class="col-xs-12">
+    <p class="text-center" style="background-color: white; font-size: 25px; margin:0 -15px;">BucketLists Page</p>
+    <ul class="row bucketlist">
+      <!-- ko foreach: bucketListVM.bucketListItems -->
+      <li class="col-xs-12 bucketlist-item">
+        <a href="">
+          <div class="header">
+            <div class=""><h4 data-bind="text: name"></h4><p class="pull-right" data-bind="text: 'created at '+created_at.split('T')[0]"></p></div>
+          </div>
+          <div class="detail">
+            <p data-bind="text: description.slice(0,100) + '...'"></p>
+          </div>
+        </a>
+      </li>
+      <!-- /ko -->
+    </ul>
+  </div>
+</div>
+{% endblock content %}
+{% block js %}
+  <script src="{% static "js/BucketListViewModel.js" %}"></script>
+  {{block.super}}
+  <script type="text/javascript">
+    indexVM.bucketListVM.listBucketList();
+  </script>
+{% endblock js %}

@@ -20,7 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'j#u@djmv(3+jj3__ujd5ale=(%7s^g^r3*8#l^z@vjs1b9r6m3'
+SECRET_KEY = None
+try:
+    SECRET_KEY = os.environ['BK_SECRET']
+except KeyError as e:
+    print('The environment variable BK_SECRET must be set')
+    raise e
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+    'rest_framework.authtoken',
+
+    'bucketlist',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +64,7 @@ ROOT_URLCONF = 'bucketie.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,11 +82,20 @@ WSGI_APPLICATION = 'bucketie.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+password = None
+try:
+    password = os.environ['BK_DB_PASSWORD']
+except KeyError as e:
+    print('The environment variable BK_DB_PASSWORD must be set')
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('BK_DB_NAME', 'bucketie'),
+        'USER': os.environ.get('BK_DB_USER', 'tim'),
+        'PASSWORD': password,
+        'HOST': os.environ.get('BK_DB_HOST', 'localhost'),
+        'PORT': os.environ.get('BK_DB_PORT', ''),
     }
 }
 
@@ -118,3 +137,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}

@@ -5,3 +5,6 @@ def index(request):
 
 def signedin(request):
     return render(request, 'bucketlist/signedin.html')
+
+def bucketlist_list(request):
+    return render(request, 'bucketlist/bucketlist_list.html')

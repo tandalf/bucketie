@@ -16,4 +16,5 @@ urlpatterns = router.urls
 urlpatterns += [
     url(r'^$', index, name='index'),
     url(r'^signedin$', signedin, name='signedin'),
+    url(r'users/(?P<pk>[0-9]+)/$', UserView.as_view(), name='user-detail'),
 ]

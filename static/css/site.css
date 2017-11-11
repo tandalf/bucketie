@@ -199,6 +199,37 @@ a:hover {
     padding-top: 20px
 }
 
+.bucketlist {
+    background-color: white;
+    list-style: none;
+    min-height: 100vh;
+}
+
+ul.bucketlist {
+    padding-left: 0px;
+}
+
+.bucketlist-item {
+    border-bottom: 1px dotted lightgrey;
+}
+
+.bucketlist-item:hover {
+    background-color: #f7f7f7;
+}
+
+.bucketlist-item .header p {
+    margin-top: -32px;
+}
+
+.bucketlist-item a {
+    text-decoration: none;
+    color: initial;
+}
+
+.bucketlist-item a:hover {
+    background-color: grey;
+}
+
 .actions {
     max-width: 800px;
 }
